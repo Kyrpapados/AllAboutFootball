@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FootballApp</string>
+    <string name="loading">Loading</string>
+    <string name="error">Error</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="team_address">Address: %1$s</string>
+    <string name="team_phone">Phone: %1$s</string>
+    <string name="team_website">Website: %1$s</string>
+    <string name="team_email">Email: %1$s</string>
+    <string name="team_founded">Founded: %1$s</string>
+    <string name="team_colors">Club colors: %1$s</string>
+    <string name="team_coach">Coach: %1$s</string>
+
+    <string name="matchday">Matchday %1$s</string>
+</resources>
