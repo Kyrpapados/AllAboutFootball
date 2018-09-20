@@ -8,71 +8,39 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_standing.view.*
 import kyrpapados.footballapp.R
 import kyrpapados.footballapp.data.model.local.TableItem
-import kyrpapados.footballapp.utils.GlideApp
-import kyrpapados.footballapp.utils.Statics.Companion.VIEW_ITEM
-import kyrpapados.footballapp.utils.Statics.Companion.VIEW_TITLE
 
-class StandingsAdapter(private val mContext: Context, private val dataList: List<TableItem>, private val listener: Listener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StandingsAdapter(private val mContext: Context, private val dataList: List<TableItem>, private val listener: Listener) : RecyclerView.Adapter<StandingsAdapter.ViewHolder>() {
     interface Listener {
 
         fun onItemClick(tableItem: TableItem)
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (dataList[position].position == -1) {
-            VIEW_TITLE
-        } else {
-            VIEW_ITEM
-        }
-    }
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        var view: View
-
-        if (viewType == VIEW_TITLE) {
-            view = LayoutInflater.from(parent.context).inflate(R.layout.item_standing_header, parent, false)
-            return ViewHolder(view)
-        } else {
-            view = LayoutInflater.from(parent.context).inflate(R.layout.item_standing, parent, false)
-            return ViewHolder(view)
-        }
-
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_standing, parent, false)
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int = dataList.size
 
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        if(holder.itemViewType == VIEW_TITLE){
-            (holder as ViewHeaderHolder)
-        }else{
-            (holder as ViewHolder).bind(dataList[position], position, mContext, listener)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(dataList[position], listener)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(tableItem: TableItem, position: Int, mContext: Context, listener: Listener) {
-            itemView.teamPosition.text = tableItem.position.toString() + "."
-            itemView.teamName.text = tableItem.team!!.name
-            itemView.teamGames.text = tableItem.playedGames.toString()
-            itemView.teamWon.text = tableItem.won.toString()
-            itemView.teamDraws.text = tableItem.draw.toString()
-            itemView.teamlost.text = tableItem.lost.toString()
-            itemView.teamPoints.text = tableItem.points.toString()
+        fun bind(tableItem: TableItem, listener: Listener) {
+            if(tableItem.position != -1){
+                itemView.teamPosition.text = tableItem.position.toString() + "."
+                itemView.teamName.text = tableItem.team!!.name
+                itemView.teamGames.text = tableItem.playedGames.toString()
+                itemView.teamWon.text = tableItem.won.toString()
+                itemView.teamDraws.text = tableItem.draw.toString()
+                itemView.teamlost.text = tableItem.lost.toString()
+                itemView.teamPoints.text = tableItem.points.toString()
 
-            GlideApp.with(mContext)
-                    .load(tableItem.team.crestURI)
-                    .override(60, 60)
-                    .centerCrop()
-                    .into(itemView.teamUri)
-
-            itemView.setOnClickListener{ listener.onItemClick(tableItem) }
+                itemView.setOnClickListener{ listener.onItemClick(tableItem) }
+            }
         }
     }
-
-    class ViewHeaderHolder(view: View) : RecyclerView.ViewHolder(view)
 }

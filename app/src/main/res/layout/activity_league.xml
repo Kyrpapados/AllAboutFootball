@@ -6,17 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.leagueboard.LeagueActivity">
 
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/info_light"
+        app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextColor="@color/gray"
+        app:tabIndicator="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/viewpager_main"
         app:tabMode="fixed" />
 
-    <android.support.v4.view.ViewPager
+    <kyrpapados.footballapp.utils.NonSwipeableViewPager
         android:id="@+id/viewpager_main"
         android:layout_width="0dp"
         android:layout_height="0dp"

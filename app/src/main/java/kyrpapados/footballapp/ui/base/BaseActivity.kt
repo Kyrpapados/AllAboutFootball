@@ -2,24 +2,25 @@ package kyrpapados.footballapp.ui.base
 
 import android.app.ProgressDialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.LayoutRes
-
+import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.request.target.Target
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.toolbar.*
 import kyrpapados.footballapp.R
-import android.content.Intent
-
+import kyrpapados.footballapp.utils.GlideApp
 
 
 abstract class BaseActivity : DaggerAppCompatActivity(), BaseContract.IView {
-
     /**
      * A dialog showing a progress indicator and an optional text message or
      * view.
      */
-    protected var mProgressDialog: ProgressDialog? = null
+    private var mProgressDialog: ProgressDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +29,36 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseContract.IView {
         attachView()
         setContentView(setLayout())
         handleIntent(intent)
+        setupAppbar(getActivityTitle(), getActivityLogo(), getLocalLogo())
         initialzeProgressDialoge()
         init(savedInstanceState)
 
+    }
+
+    protected fun setupAppbar(title: String?, logoUrl: String?, logoLocal: Int) {
+        if (toolbar != null) {
+
+            if (logoUrl != null) {
+                logo!!.visibility = View.VISIBLE
+
+                GlideApp.with(this)
+                        .load(logoUrl)
+                        .error(logoLocal)
+                        .override(Target.SIZE_ORIGINAL)
+                        .into(logo)
+            } else if (logoLocal != 0) {
+                logo!!.visibility = View.VISIBLE
+
+                GlideApp.with(this)
+                        .load(logoLocal)
+                        .override(Target.SIZE_ORIGINAL)
+                        .into(logo)
+            }
+
+            setSupportActionBar(toolbar)
+            supportActionBar!!.setDisplayShowTitleEnabled(false)
+            toolbar!!.setNavigationOnClickListener({ v -> onBackPressed() })
+        }
     }
 
     fun initialzeProgressDialoge() {
@@ -61,6 +89,9 @@ abstract class BaseActivity : DaggerAppCompatActivity(), BaseContract.IView {
     abstract fun detachView()
     abstract fun init(savedInstanceState: Bundle?)
     abstract fun handleIntent(intent: Intent)
+    abstract fun getActivityTitle(): String
+    abstract fun getActivityLogo(): String
+    abstract fun getLocalLogo(): Int
 
     fun showProgress(msgResId: Int,
                      keyListener: DialogInterface.OnKeyListener?) {

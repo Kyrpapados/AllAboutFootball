@@ -14,7 +14,7 @@ interface FixturesContract {
 
     interface Presenter<V : FixturesContract.View> : BaseContract.Presenter<V>{
 
-        fun getMatches(id : Int, currentMatchday : Int)
+        fun getUpcomingMatches(id : Int)
 
     }
 }

@@ -1,32 +1,37 @@
-package kyrpapados.footballapp.ui.leagueboard.fixtures
+package kyrpapados.footballapp.ui.leagueboard.fixtures.matchday
 
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_teams.*
-import kotlinx.android.synthetic.main.fragment_fixtures.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_match_day.*
+import kotlinx.android.synthetic.main.fragment_results.*
+
 import kyrpapados.footballapp.R
 import kyrpapados.footballapp.data.model.local.matches.Matches
 import kyrpapados.footballapp.ui.base.BaseFragment
 import kyrpapados.footballapp.utils.Statics
 import javax.inject.Inject
 
-class FixturesFragment : BaseFragment(), FixturesContract.View {
+
+class MatchDayFragment : BaseFragment(), MatchDayContract.View {
 
     @Inject
-    lateinit var mPresenter: FixturesPresenter<FixturesContract.View>
+    lateinit var mPresenter: MatchDayPresenter<MatchDayContract.View>
 
     private var competiotionId: Int = 0
-
     private var currentMatchday: Int = 0
 
-    private lateinit var mAdapter: FixturesAdapter
+    private lateinit var mAdapter: MatchDayAdapter
 
     companion object {
-        fun show(id: Int, currentMatchday: Int): FixturesFragment {
-            val fixturesFragment = FixturesFragment()
+        fun show(id: Int, currentMatchday: Int): MatchDayFragment {
+            val fixturesFragment = MatchDayFragment()
 
             val bundle = Bundle()
             bundle.putInt(Statics.COMPETITION_ID, id)
@@ -38,7 +43,7 @@ class FixturesFragment : BaseFragment(), FixturesContract.View {
         }
     }
 
-    override fun setLayout(): Int = R.layout.fragment_fixtures
+    override fun setLayout(): Int = R.layout.fragment_match_day
 
     override fun attachView() {
         mPresenter.onAttach(this)
@@ -54,18 +59,18 @@ class FixturesFragment : BaseFragment(), FixturesContract.View {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        val mLayoutManager = LinearLayoutManager(this.context)
+        upcomingMatchesView.layoutManager = mLayoutManager
+        upcomingMatchesView.itemAnimator = DefaultItemAnimator()
+        upcomingMatchesView.addItemDecoration(DividerItemDecoration(upcomingMatchesView.context, mLayoutManager.orientation))
 
-        mPresenter.getUpcomingMatches(competiotionId)
-
+        mPresenter.getMatches(competiotionId, currentMatchday)
     }
 
     override fun showMatches(matchList: List<Matches>) {
-        var matchDayList = mutableListOf<Int>()
-        matchList.forEach { matches -> matchDayList.add(matches.matchday!!)  }
-        val fragmentAdapter = FixturePagerAdapter(childFragmentManager, competiotionId, matchDayList.distinct())
-        fixtures.adapter = fragmentAdapter
+        mAdapter = MatchDayAdapter(this.context!!,  matchList)
+        upcomingMatchesView.adapter = mAdapter
 
-        matchday_tabs.setupWithViewPager(fixtures)
     }
 
 }

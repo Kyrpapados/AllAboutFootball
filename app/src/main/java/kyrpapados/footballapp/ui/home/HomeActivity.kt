@@ -13,11 +13,16 @@ import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeContract.HomeView, ItemClickListener {
 
-
     @Inject
     lateinit var mPresenter: HomePresenter<HomeContract.HomeView>
 
     override fun setLayout(): Int = R.layout.activity_home
+
+    override fun getActivityTitle(): String = ""
+
+    override fun getActivityLogo(): String = ""
+
+    override fun getLocalLogo(): Int = -1
 
     override fun attachView() {
         mPresenter.onAttach(this)
@@ -32,6 +37,7 @@ class HomeActivity : BaseActivity(), HomeContract.HomeView, ItemClickListener {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         competitionView.layoutManager = GridLayoutManager(this, 2)
 
         mPresenter.getAllCompetitions()

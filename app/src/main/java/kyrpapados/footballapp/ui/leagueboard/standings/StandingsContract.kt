@@ -6,7 +6,7 @@ import kyrpapados.footballapp.ui.base.BaseContract
 interface StandingsContract {
     interface StandingsView : BaseContract.IView{
 
-        fun showStandings(standings: List<Standings>)
+        fun showStandings(standings: MutableList<Standings>)
 
         fun showSeason(stardDate : String, endDate: String)
 

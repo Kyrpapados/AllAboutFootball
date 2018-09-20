@@ -55,6 +55,28 @@ class CompetitionRepository @Inject constructor(var mFootballApi: FootballApi) {
                 .doOnError({ error -> Log.d("online", "error: " + error.message) })
     }
 
+    fun fetchPreviousMatches(id : Int) : Single<StateWrapper<MatchesResponce>> {
+        return  mFootballApi.getPreviousMatches(id, "FINISHED")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { StateWrapper.success(it) }
+                .onErrorReturn({ it ->
+                    StateWrapper.error(it, null)
+                })
+                .doOnError({ error -> Log.d("online", "error: " + error.message) })
+    }
+
+    fun fetchUpcomingMatches(id : Int) : Single<StateWrapper<MatchesResponce>> {
+        return  mFootballApi.getAllMatches(id, "SCHEDULED")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { StateWrapper.success(it) }
+                .onErrorReturn({ it ->
+                    StateWrapper.error(it, null)
+                })
+                .doOnError({ error -> Log.d("online", "error: " + error.message) })
+    }
+
     fun fetchTeamInfo(id : Int) : Single<StateWrapper<Teams>> {
         return mFootballApi.getTeamInformation(id)
                 .subscribeOn(Schedulers.io())

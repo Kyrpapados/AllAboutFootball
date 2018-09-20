@@ -2,27 +2,23 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/teamPosition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="4dp"
         android:text="1"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/teamUri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/teamPosition"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/teamName" />
+        tools:background="@drawable/bg_oval" />
 
     <TextView
         android:id="@+id/teamName"
@@ -30,65 +26,94 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:text="PSV"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/teamUri"
-        app:layout_constraintEnd_toStartOf="@+id/teamGames"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/teamGames"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="25"
         android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/teamWon"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/teamWon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="15"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/teamDraws"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/teamDraws"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="5"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/teamlost"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/teamlost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="5"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/teamPoints"
+        app:layout_constraintStart_toEndOf="@id/teamPosition"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/teamPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="4dp"
+        android:layout_marginEnd="8dp"
         android:text="82"
         android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/teamGames"
+        app:layout_constraintStart_toEndOf="@+id/teamName"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/teamGames"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:text="25"
+        android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/teamWon"
+        app:layout_constraintStart_toEndOf="@+id/teamPoints"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/teamWon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:text="15"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/win_green"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/teamDraws"
+        app:layout_constraintStart_toEndOf="@+id/teamGames"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/bg_oval"/>
+
+    <TextView
+        android:id="@+id/teamDraws"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:text="5"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@color/draw_orange"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/teamlost"
+        app:layout_constraintStart_toEndOf="@+id/teamWon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/bg_oval"/>
+
+    <TextView
+        android:id="@+id/teamlost"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:gravity="center"
+        android:text="5"
+        android:textSize="16sp"
+        android:textColor="@color/lost_red"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/teamDraws"
+        tools:background="@drawable/bg_oval"/>
 
 </android.support.constraint.ConstraintLayout>

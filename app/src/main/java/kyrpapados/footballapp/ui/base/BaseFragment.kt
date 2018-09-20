@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import dagger.android.support.DaggerFragment
 import kyrpapados.footballapp.R
+import kyrpapados.footballapp.R.string.hello_blank_fragment
 
 
 abstract class BaseFragment : DaggerFragment(), BaseContract.IView {
@@ -50,6 +51,7 @@ abstract class BaseFragment : DaggerFragment(), BaseContract.IView {
         if (mProgressDialog == null) {
 
             mProgressDialog = ProgressDialog(context)
+            //mProgressDialog?.setMessage(resources.getString(R.string.hello_blank_fragment))
             mProgressDialog!!.isIndeterminate = true
             mProgressDialog!!.setCancelable(false)
         }

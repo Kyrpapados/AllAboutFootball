@@ -4,5 +4,5 @@ import kyrpapados.footballapp.data.network.FootballApi
 import kyrpapados.footballapp.ui.base.BasePreseneter
 import javax.inject.Inject
 
-class LeaguePresenter<V : LeagueConrtact.LeagueView>@Inject constructor(var mFootballApi: FootballApi) : BasePreseneter<V>(), LeagueConrtact.LeaguePresenter<V> {
+class LeaguePresenter<V : LeagueContract.View>@Inject constructor(var mFootballApi: FootballApi) : BasePreseneter<V>(), LeagueContract.Presenter<V> {
 }

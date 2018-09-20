@@ -3,4 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="lost_red">#D82231</color>
+    <color name="draw_orange">#ff6d00</color>
+    <color name="win_green">#00ff48</color>
+
+    <color name="transparent">#00ffffff</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="info_light">#6d6e70</color>
+
+    <color name="gray">#C5C7C9</color>
 </resources>

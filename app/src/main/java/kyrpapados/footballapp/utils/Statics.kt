@@ -5,6 +5,14 @@ class Statics {
         val BASE_URL : String = "http://api.football-data.org/v2/"
         val AUTH_TOKEN : String = "0b83071c8818431cbed380285124c798"
 
+        /**
+         * Preferences
+         **/
+        val PREFERENCES = "FOOTBALL_PREFERENCES"
+        val FIRST_INSTALL = "FIRST_INSTALL"
+        val BALL_DIMENS = "BALL_DIMENS"
+        val TEXT_DIMENS = "TEXT_DIMENS"
+        val SCREEN_WIDTH = "SCREEN_WIDTH"
 
         //LABELS
         val X_AUTH_TOKEN : String = "X-Auth-Token"

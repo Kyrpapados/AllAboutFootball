@@ -22,6 +22,12 @@ interface FootballApi {
     @GET("competitions/{id}/matches")
     fun getLatestMatches(@Path("id") id : Int, @Query("matchday") matchDay: Int): Single<MatchesResponce>
 
+    @GET("competitions/{id}/matches")
+    fun getAllMatches(@Path("id") id : Int, @Query("status") status: String): Single<MatchesResponce>
+
+    @GET("competitions/{id}/matches")
+    fun getPreviousMatches(@Path("id") id : Int, @Query("status") status: String): Single<MatchesResponce>
+
     @GET("teams/{id}")
     fun getTeamInformation(@Path("id") id : Int): Single<Teams>
 }

@@ -16,7 +16,7 @@ class LeaguePagerAdapter (fm: FragmentManager,val id : Int,val currentMatchday :
             }
             1 -> FixturesFragment.show(id, currentMatchday)
             else -> {
-                return ResultsFragment()
+                return ResultsFragment.show(id, currentMatchday)
             }
         }
     }

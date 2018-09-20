@@ -34,6 +34,12 @@ class TeamsActivity : BaseActivity(), TeamsContract.View {
 
     override fun setLayout(): Int = R.layout.activity_teams
 
+    override fun getActivityTitle(): String = ""
+
+    override fun getActivityLogo(): String = ""
+
+    override fun getLocalLogo(): Int = -1
+
     override fun attachView() {
         mPresenter.onAttach(this)
     }
