@@ -26,7 +26,7 @@ class MatchDayAdapter (private val mContext : Context, private val matchLis: Lis
         fun bindItems(mContext: Context, match: Matches){
             itemView.homeTeam.text = match.homeTeam!!.name
             itemView.awayTeam.text = match.awayTeam!!.name
-            itemView.score.text = match.score!!.fullTime!!.homeTeam.toString() + " - " + match.score!!.fullTime!!.awayTeam.toString()
+            itemView.score.text = " - "
 
         }
     }

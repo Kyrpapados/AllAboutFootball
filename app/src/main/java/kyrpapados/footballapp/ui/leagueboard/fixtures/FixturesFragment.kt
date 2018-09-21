@@ -62,7 +62,8 @@ class FixturesFragment : BaseFragment(), FixturesContract.View {
     override fun showMatches(matchList: List<Matches>) {
         var matchDayList = mutableListOf<Int>()
         matchList.forEach { matches -> matchDayList.add(matches.matchday!!)  }
-        val fragmentAdapter = FixturePagerAdapter(childFragmentManager, competiotionId, matchDayList.distinct())
+
+        val fragmentAdapter = FixturePagerAdapter(childFragmentManager, competiotionId, matchDayList.distinct(), ArrayList(matchList))
         fixtures.adapter = fragmentAdapter
 
         matchday_tabs.setupWithViewPager(fixtures)

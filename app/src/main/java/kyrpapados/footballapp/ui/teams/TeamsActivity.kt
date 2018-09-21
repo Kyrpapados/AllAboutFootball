@@ -12,6 +12,8 @@ import kyrpapados.footballapp.data.model.local.teams.SquadItem
 import kyrpapados.footballapp.data.model.local.teams.Teams
 import kyrpapados.footballapp.ui.base.BaseActivity
 import kyrpapados.footballapp.utils.GlideApp
+import kyrpapados.footballapp.utils.Statics
+import kyrpapados.footballapp.utils.Statics.Companion.COMPETITION_ID
 import kyrpapados.footballapp.utils.Statics.Companion.TEAM_ID
 import javax.inject.Inject
 
@@ -24,10 +26,13 @@ class TeamsActivity : BaseActivity(), TeamsContract.View {
 
     private lateinit var mAdapter: TeamsAdapter
 
+    private var competitionId: Int = 0
+
     companion object {
-        fun show(activity: Activity, id: Int) {
+        fun show(activity: Activity, id: Int, competitionId: Int) {
             val intent = Intent(activity, TeamsActivity::class.java)
             intent.putExtra(TEAM_ID, id)
+            intent.putExtra(COMPETITION_ID, competitionId)
             activity.startActivity(intent)
         }
     }
@@ -38,7 +43,21 @@ class TeamsActivity : BaseActivity(), TeamsContract.View {
 
     override fun getActivityLogo(): String = ""
 
-    override fun getLocalLogo(): Int = -1
+    override fun getLocalLogo(): Int {
+        return if(competitionId == 2001){
+            R.drawable.logo_cl
+        }else if (competitionId == 2021){
+            R.drawable.logo_premier_league
+        }else if (competitionId == 2015){
+            R.drawable.logo_ligue_1
+        }else if (competitionId == 2002){
+            R.drawable.logo_bundesliga
+        }else if (competitionId == 2019){
+            R.drawable.logo_serie_a
+        }else{
+            R.drawable.logo_laliga
+        }
+    }
 
     override fun attachView() {
         mPresenter.onAttach(this)
@@ -50,6 +69,7 @@ class TeamsActivity : BaseActivity(), TeamsContract.View {
 
     override fun handleIntent(intent: Intent) {
         teamId = intent.getIntExtra(TEAM_ID, 0)
+        competitionId = intent.getIntExtra(COMPETITION_ID, 0)
     }
 
     override fun init(savedInstanceState: Bundle?) {

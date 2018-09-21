@@ -19,6 +19,7 @@ class Statics {
         val COMPETITION : String = "COMPETITION"
         val COMPETITION_ID : String = "COMPETITION_ID"
         val CURRENT_MATCHDAY : String = "CURRENT_MATCHDAY"
+        val MATCHES : String = "MATCHES"
 
         val TIER_ONE : String = "TIER_ONE"
         val AREAS_IDS : String = "2072,2077,2081,2088,2114,2224"

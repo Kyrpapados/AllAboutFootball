@@ -107,7 +107,7 @@ class StandingsFragment : BaseFragment(), StandingsContract.StandingsView, Stand
     }
 
     override fun onItemClick(tableItem: TableItem) {
-        TeamsActivity.show(this.activity!!, tableItem.team!!.id!!)
+        TeamsActivity.show(this.activity!!, tableItem.team!!.id!!, competitionId)
     }
 
 }

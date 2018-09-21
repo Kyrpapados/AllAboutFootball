@@ -16,6 +16,9 @@ import kyrpapados.footballapp.R
 import kyrpapados.footballapp.data.model.local.matches.Matches
 import kyrpapados.footballapp.ui.base.BaseFragment
 import kyrpapados.footballapp.utils.Statics
+import kyrpapados.footballapp.utils.Statics.Companion.COMPETITION_ID
+import kyrpapados.footballapp.utils.Statics.Companion.CURRENT_MATCHDAY
+import kyrpapados.footballapp.utils.Statics.Companion.MATCHES
 import javax.inject.Inject
 
 
@@ -29,13 +32,16 @@ class MatchDayFragment : BaseFragment(), MatchDayContract.View {
 
     private lateinit var mAdapter: MatchDayAdapter
 
+    private lateinit var matchList: ArrayList<Matches>
+
     companion object {
-        fun show(id: Int, currentMatchday: Int): MatchDayFragment {
+        fun show(id: Int, currentMatchday: Int, matchList: ArrayList<Matches>): MatchDayFragment {
             val fixturesFragment = MatchDayFragment()
 
             val bundle = Bundle()
-            bundle.putInt(Statics.COMPETITION_ID, id)
-            bundle.putInt(Statics.CURRENT_MATCHDAY, currentMatchday)
+            bundle.putInt(COMPETITION_ID, id)
+            bundle.putInt(CURRENT_MATCHDAY, currentMatchday)
+            bundle.putParcelableArrayList(MATCHES, matchList)
             fixturesFragment.arguments = bundle
 
             return fixturesFragment
@@ -54,8 +60,9 @@ class MatchDayFragment : BaseFragment(), MatchDayContract.View {
     }
 
     override fun handleArguments() {
-        competiotionId = arguments!!.getInt(Statics.COMPETITION_ID)
-        currentMatchday = arguments!!.getInt(Statics.CURRENT_MATCHDAY)
+        competiotionId = arguments!!.getInt(COMPETITION_ID)
+        currentMatchday = arguments!!.getInt(CURRENT_MATCHDAY)
+        matchList = arguments!!.getParcelableArrayList(MATCHES)
     }
 
     override fun init(savedInstanceState: Bundle?) {
@@ -64,11 +71,13 @@ class MatchDayFragment : BaseFragment(), MatchDayContract.View {
         upcomingMatchesView.itemAnimator = DefaultItemAnimator()
         upcomingMatchesView.addItemDecoration(DividerItemDecoration(upcomingMatchesView.context, mLayoutManager.orientation))
 
-        mPresenter.getMatches(competiotionId, currentMatchday)
+        //mPresenter.getMatches(competiotionId, currentMatchday)
+        showMatches(matchList)
     }
 
     override fun showMatches(matchList: List<Matches>) {
-        mAdapter = MatchDayAdapter(this.context!!,  matchList)
+        val filteredList = matchList.filter { matches ->  matches.matchday == currentMatchday}
+        mAdapter = MatchDayAdapter(this.context!!,  filteredList)
         upcomingMatchesView.adapter = mAdapter
 
     }
